@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsMessageBroker\Model;
 
-use Magento\CatalogMessageBroker\HttpClient\RestClient;
+use Magento\ReviewsMessageBroker\HttpClient\RestClient;
 use Magento\CatalogExport\Event\Data\Entity;
 use Psr\Log\LoggerInterface;
 

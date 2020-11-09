@@ -22,7 +22,7 @@ service ProductReviews {
   rpc importProductReviews (ImportReviewsRequest) returns (ImportReviewsResponse) {}
   rpc deleteProductReviews (DeleteReviewsRequest) returns (DeleteReviewsResponse) {}
   rpc getProductReviews (ProductReviewRequest) returns (ProductReviewResponse) {}
-  rpc getCustomerProductReviews (CustomerProductReviewRequest) returns (CustomerProductReviewResponse) {}
+  rpc getCustomerProductReviews (CustomerProductReviewRequest) returns (ProductReviewResponse) {}
   rpc getProductReviewCount (ProductReviewCountRequest) returns (ProductReviewCountResponse) {}
 }
 
@@ -61,11 +61,6 @@ message CustomerProductReviewRequest {
   string customer_id = 1;
   string store = 2;
   PaginationRequest pagination = 3;
-}
-
-message CustomerProductReviewResponse {
-  repeated ReadReview items = 1;
-  PaginationResponse pagination = 2;
 }
 
 message ProductReviewCountRequest {
