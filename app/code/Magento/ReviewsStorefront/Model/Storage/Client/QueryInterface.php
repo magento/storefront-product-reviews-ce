@@ -29,7 +29,9 @@ interface QueryInterface
      * @param string $entityName
      * @param array $ids
      * @param array $fields
+     *
      * @return EntryIteratorInterface
+     *
      * @throws NotFoundException
      * @throws RuntimeException
      */
@@ -51,7 +53,6 @@ interface QueryInterface
      *
      * @return EntryIteratorInterface
      *
-     * @throws NotFoundException
      * @throws RuntimeException
      */
     public function searchFilteredEntries(
@@ -63,7 +64,7 @@ interface QueryInterface
     ): EntryIteratorInterface;
 
     /**
-     * Retrieve entries count using terms.
+     * Retrieve entries count by specified filter terms.
      *
      * @param string $indexName
      * @param string $entityName

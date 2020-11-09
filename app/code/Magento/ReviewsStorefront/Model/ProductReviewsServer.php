@@ -192,6 +192,7 @@ class ProductReviewsServer implements ProductReviewsServerInterface
 
     /**
      * @inheritdoc
+     * TODO encapsulate common (getProductReviews + getCustomerProductReviews) part into private method
      */
     public function getProductReviews(ProductReviewRequestInterface $request): ProductReviewResponseInterface
     {

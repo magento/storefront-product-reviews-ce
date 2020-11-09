@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\DataProvider;
 
-use Magento\Framework\Exception\NotFoundException;
 use Magento\ReviewsStorefront\Model\Storage\Client\QueryInterface;
 use Magento\ReviewsStorefront\Model\Storage\State;
 use Magento\ReviewsStorefront\Model\Storage\Client\Config\Review;
@@ -79,7 +78,13 @@ class ReviewDataProvider
      */
     public function fetchByProductId(string $productId, string $scope, ?PaginationRequestInterface $pagination): array
     {
-        return $this->fetchReviews(['product_id' => $productId, 'visibility' => $scope], $pagination);
+        return $this->fetchReviews(
+            [
+                'product_id' => $productId,
+                'visibility' => $scope,
+            ],
+            $pagination
+        );
     }
 
     /**
@@ -95,7 +100,13 @@ class ReviewDataProvider
      */
     public function fetchByCustomerId(string $customerId, string $scope, ?PaginationRequestInterface $pagination): array
     {
-        return $this->fetchReviews(['customer_id' => $customerId, 'visibility' => $scope], $pagination);
+        return $this->fetchReviews(
+            [
+                'customer_id' => $customerId,
+                'visibility' => $scope,
+            ],
+            $pagination
+        );
     }
 
     /**
@@ -118,15 +129,6 @@ class ReviewDataProvider
                 $pagination ? $pagination->getSize() : $this->pageSize,
                 $pagination ? $pagination->getCursor() : $this->cursor
             );
-        } catch (NotFoundException $notFoundException) {
-            // TODO validate
-            $params = \implode(', ', \array_map(function ($value, $key) {
-                return \sprintf('%s = %s', $key, $value);
-            }, $params, \array_keys($params)));
-
-            $this->logger->error(\sprintf('Cannot find reviews for %s', $params), ['exception' => $notFoundException]);
-
-            return [];
         } catch (\Throwable $e) {
             $this->logger->error($e);
             throw $e;

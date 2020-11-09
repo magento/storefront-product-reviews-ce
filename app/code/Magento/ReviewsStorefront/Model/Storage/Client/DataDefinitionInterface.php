@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\Model\Storage\Client;
 
+use Elasticsearch\Common\Exceptions\RuntimeException;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\StateException;
@@ -87,8 +88,21 @@ interface DataDefinitionInterface
      * @param string $name
      *
      * @return bool
+     *
+     * @throws RuntimeException
      */
     public function existsDataSource(string $name): bool;
+
+    /**
+     * Refresh data source data.
+     *
+     * @param string $name
+     *
+     * @return void
+     *
+     * @throws RuntimeException
+     */
+    public function refreshDataSource(string $name): void;
 
     /**
      * Create Entity with schema definition.

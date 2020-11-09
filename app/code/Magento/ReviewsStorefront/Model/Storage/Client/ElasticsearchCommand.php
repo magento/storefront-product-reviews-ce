@@ -34,20 +34,12 @@ class ElasticsearchCommand implements CommandInterface
     private $connectionPull;
 
     /**
-     * @var array
-     */
-    private $entitiesVisibleInSearch;
-
-    /**
      * @param ConnectionPull $connectionPull
-     * @param array $entitiesVisibleInSearch
      */
     public function __construct(
-        ConnectionPull $connectionPull,
-        array $entitiesVisibleInSearch = []
+        ConnectionPull $connectionPull
     ) {
         $this->connectionPull = $connectionPull;
-        $this->entitiesVisibleInSearch = $entitiesVisibleInSearch;
     }
 
     /**
@@ -108,7 +100,7 @@ class ElasticsearchCommand implements CommandInterface
             'index' => $indexName,
             'type' => $entityName,
             'body' => [],
-            'refresh' => \in_array($entityName, $this->entitiesVisibleInSearch),
+            'refresh' => false,
         ];
 
         foreach ($documents as $document) {

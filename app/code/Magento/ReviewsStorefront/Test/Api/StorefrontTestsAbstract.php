@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\Test\Api;
 
+use Elasticsearch\Common\Exceptions\RuntimeException;
 use Magento\Framework\Amqp\Config;
 use Magento\Framework\App\ResourceConnection;
 use Magento\ReviewsStorefront\Model\Storage\Client\DataDefinitionInterface;
@@ -66,12 +67,25 @@ abstract class StorefrontTestsAbstract extends TestCase
     private $compareArraysRecursively;
 
     /**
+     * @var DataDefinitionInterface
+     */
+    private $dataDefinition;
+
+    /**
+     * @var State
+     */
+    private $storageState;
+
+    /**
      * @inheritdoc
      */
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->compareArraysRecursively = Bootstrap::getObjectManager()->create(CompareArraysRecursively::class);
+        $this->dataDefinition = Bootstrap::getObjectManager()->create(DataDefinitionInterface::class);
+        $this->storageState = Bootstrap::getObjectManager()->create(State::class);
     }
 
     /**
@@ -121,14 +135,9 @@ abstract class StorefrontTestsAbstract extends TestCase
      */
     private function deleteDataSource(string $entityType, ?string $storeCode): void
     {
-        /** @var DataDefinitionInterface $dataDefinition */
-        $dataDefinition = Bootstrap::getObjectManager()->get(DataDefinitionInterface::class);
-        /** @var State $storageState */
-        $storageState = Bootstrap::getObjectManager()->get(State::class);
-
         try {
-            $sourceName = $storageState->getCurrentDataSourceName([$storeCode, $entityType]);
-            $dataDefinition->deleteDataSource($sourceName);
+            $sourceName = $this->storageState->getCurrentDataSourceName([$storeCode, $entityType]);
+            $this->dataDefinition->deleteDataSource($sourceName);
         } catch (\Exception $e) {
             // Do nothing if no source
         }
@@ -182,9 +191,24 @@ abstract class StorefrontTestsAbstract extends TestCase
     {
         if (!$this->isSoap()) {
             Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke(self::CONSUMERS);
+            $this->refreshDataSource('review');
 
             parent::runTest();
         }
+    }
+
+    /**
+     * Refresh data source.
+     *
+     * @param string $entityType
+     *
+     * @return void
+     *
+     * @throws RuntimeException
+     */
+    private function refreshDataSource(string $entityType): void
+    {
+        $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName([$entityType]));
     }
 
     /**

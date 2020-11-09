@@ -96,6 +96,14 @@ class ElasticsearchDataDefinitionAdapter implements DataDefinitionInterface
     /**
      * @inheritdoc
      */
+    public function refreshDataSource(string $name): void
+    {
+        $this->getConnection()->indices()->refresh(['index' => $name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function createEntity(string $dataSourceName, string $entityName, array $schema): void
     {
         $params = [

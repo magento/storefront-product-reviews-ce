@@ -117,14 +117,12 @@ class ElasticsearchQuery implements QueryInterface
             $searchBody['query']['bool']['filter'][]['term'][$key] = $value;
         }
 
-        // TODO validate
         if (null !== $size) {
             $searchBody['size'] = $size;
             $searchBody['sort'][] = ['_id' => 'desc'];
         }
 
-        // $cursor > 0
-        if (null !== $cursor && 0 !== $cursor) {
+        if ($cursor > 0) {
             $searchBody['search_after'] = [$cursor];
         }
 
