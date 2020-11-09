@@ -13,7 +13,7 @@ use Elasticsearch\ClientBuilder;
 use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
- * Connection pull class.
+ * Elasticsearch connection pull.
  */
 class ConnectionPull
 {
@@ -45,7 +45,8 @@ class ConnectionPull
     public function getConnection()
     {
         $pid = getmypid();
-        if (!isset($this->client[$pid])) {
+
+        if (!isset($this->connectionPull[$pid])) {
             $config = $this->config->buildConfig();
             $this->connectionPull[$pid] = ClientBuilder::fromConfig($config, true);
         }

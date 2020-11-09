@@ -1,0 +1,2 @@
+app/code/Magento/ReviewsStorefrontApi/Proto
+app/code/Magento/ReviewsStorefrontApi/Metadata/Catalog.php

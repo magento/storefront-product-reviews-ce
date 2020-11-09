@@ -11,13 +11,11 @@ namespace Magento\ReviewsStorefront\Model\Storage\Data;
 use Magento\Framework\ObjectManagerInterface;
 
 /**
- * Document factory class.
+ * Elasticsearch document factory class.
  */
 class DocumentFactory
 {
     /**
-     * Object Manager instance
-     *
      * @var ObjectManagerInterface
      */
     private $objectManager;

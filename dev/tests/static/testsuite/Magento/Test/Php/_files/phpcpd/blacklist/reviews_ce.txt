@@ -1,0 +1,3 @@
+Magento/ReviewsStorefrontApi/Api
+Magento/ReviewsStorefrontApi/Proto
+Magento/ReviewsStorefrontApi/Api/Data
