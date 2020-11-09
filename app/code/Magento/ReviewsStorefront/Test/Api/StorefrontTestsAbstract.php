@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\Test\Api;
 
-use Elasticsearch\Common\Exceptions\RuntimeException;
 use Magento\Framework\Amqp\Config;
 use Magento\Framework\App\ResourceConnection;
 use Magento\ReviewsStorefront\Model\Storage\Client\DataDefinitionInterface;
@@ -180,7 +179,12 @@ abstract class StorefrontTestsAbstract extends TestCase
     protected function runTest()
     {
         if (!$this->isSoap()) {
-            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke();
+            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke(
+                [
+                    'export.product.reviews.consumer',
+                    'export.rating.metadata.consumer',
+                ]
+            );
             $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
 
             parent::runTest();

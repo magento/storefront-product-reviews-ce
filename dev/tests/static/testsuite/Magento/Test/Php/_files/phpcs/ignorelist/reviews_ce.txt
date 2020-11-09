@@ -1,4 +1,4 @@
 # @todo remove when will be fixed into https://github.com/magento/catalog-storefront/issues/124
 app/code/Magento/ReviewsStorefrontApi/Api
 app/code/Magento/ReviewsStorefrontApi/Proto
-app/code/Magento/ReviewsStorefrontApi/Metadata/Catalog.php
+app/code/Magento/ReviewsStorefrontApi/Metadata
