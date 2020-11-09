@@ -41,11 +41,11 @@ interface ProductReviewsInterface extends GRPC\ServiceInterface
     /**
     * @param GRPC\ContextInterface $ctx
     * @param CustomerProductReviewRequest $in
-    * @return CustomerProductReviewResponse
+    * @return ProductReviewResponse
     *
     * @throws GRPC\Exception\InvokeException
     */
-    public function getCustomerProductReviews(GRPC\ContextInterface $ctx, CustomerProductReviewRequest $in): CustomerProductReviewResponse;
+    public function getCustomerProductReviews(GRPC\ContextInterface $ctx, CustomerProductReviewRequest $in): ProductReviewResponse;
 
     /**
     * @param GRPC\ContextInterface $ctx

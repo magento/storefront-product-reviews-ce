@@ -96,7 +96,7 @@ class ProductReviewsClient extends \Grpc\BaseStub
         return $this->_simpleRequest(
             '/magento.reviewsStorefrontApi.proto.ProductReviews/getCustomerProductReviews',
             $argument,
-            ['\Magento\ReviewsStorefrontApi\Proto\CustomerProductReviewResponse', 'decode'],
+            ['\Magento\ReviewsStorefrontApi\Proto\ProductReviewResponse', 'decode'],
             $metadata,
             $options
         );
