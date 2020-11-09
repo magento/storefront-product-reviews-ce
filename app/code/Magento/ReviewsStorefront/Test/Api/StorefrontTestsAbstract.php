@@ -52,16 +52,6 @@ abstract class StorefrontTestsAbstract extends TestCase
     ];
 
     /**
-     * List of reviews & ratings metadata consumers
-     *
-     * @var array
-     */
-    private const CONSUMERS = [
-        'export.product.reviews.consumer',
-        'export.rating.metadata.consumer',
-    ];
-
-    /**
      * @var CompareArraysRecursively
      */
     private $compareArraysRecursively;
@@ -190,25 +180,11 @@ abstract class StorefrontTestsAbstract extends TestCase
     protected function runTest()
     {
         if (!$this->isSoap()) {
-            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke(self::CONSUMERS);
-            $this->refreshDataSource('review');
+            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke();
+            $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
 
             parent::runTest();
         }
-    }
-
-    /**
-     * Refresh data source.
-     *
-     * @param string $entityType
-     *
-     * @return void
-     *
-     * @throws RuntimeException
-     */
-    private function refreshDataSource(string $entityType): void
-    {
-        $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName([$entityType]));
     }
 
     /**
