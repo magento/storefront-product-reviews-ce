@@ -14,7 +14,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 /**
  * Invoke consumers to push data from Magento Monolith to storefront service
  */
-class ConsumerInvoker
+class ReviewsConsumerInvoker
 {
     /**
      * Batch size

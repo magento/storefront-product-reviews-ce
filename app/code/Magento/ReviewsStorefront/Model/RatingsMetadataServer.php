@@ -25,6 +25,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Class for retrieving & importing rating metadata
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class RatingsMetadataServer implements RatingsMetadataServerInterface
 {

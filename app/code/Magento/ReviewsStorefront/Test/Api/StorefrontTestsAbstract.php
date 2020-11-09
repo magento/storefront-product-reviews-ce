@@ -15,7 +15,7 @@ use Magento\ReviewsStorefront\Model\Storage\State;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CompareArraysRecursively;
-use Magento\TestFramework\Workaround\ConsumerInvoker;
+use Magento\TestFramework\Workaround\ReviewsConsumerInvoker;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
@@ -179,12 +179,7 @@ abstract class StorefrontTestsAbstract extends TestCase
     protected function runTest()
     {
         if (!$this->isSoap()) {
-            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke(
-                [
-                    'export.product.reviews.consumer',
-                    'export.rating.metadata.consumer',
-                ]
-            );
+            Bootstrap::getObjectManager()->create(ReviewsConsumerInvoker::class)->invoke();
             $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
 
             parent::runTest();

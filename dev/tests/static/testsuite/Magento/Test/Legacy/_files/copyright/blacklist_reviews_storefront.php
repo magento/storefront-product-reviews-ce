@@ -5,5 +5,5 @@
  */
 return [
     '/app\/code\/Magento\/ReviewsStorefrontApi\/Proto\S*\.php/',
-    '/app\/code\/Magento\/ReviewsStorefrontApi\/Metadata\/Catalog\.php$/',
+    '/app\/code\/Magento\/ReviewsStorefrontApi\/Metadata\/Reviews\.php$/',
 ];
