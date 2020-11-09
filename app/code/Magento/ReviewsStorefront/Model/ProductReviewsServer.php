@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace Magento\ReviewsStorefront\Model;
 
 use Magento\ReviewsStorefrontApi\Api\Data\CustomerProductReviewRequestInterface;
-use Magento\ReviewsStorefrontApi\Api\Data\CustomerProductReviewResponseInterface;
-use Magento\ReviewsStorefrontApi\Api\Data\CustomerProductReviewResponseInterfaceFactory;
 use Magento\ReviewsStorefrontApi\Api\Data\DeleteReviewsRequestInterface;
 use Magento\ReviewsStorefrontApi\Api\Data\DeleteReviewsResponseInterface;
 use Magento\ReviewsStorefrontApi\Api\Data\DeleteReviewsResponseInterfaceFactory;
@@ -71,11 +69,6 @@ class ProductReviewsServer implements ProductReviewsServerInterface
     private $productReviewResponseInterfaceFactory;
 
     /**
-     * @var CustomerProductReviewResponseInterfaceFactory
-     */
-    private $customerProductReviewResponseInterfaceFactory;
-
-    /**
      * @var PaginationResponseInterfaceFactory
      */
     private $paginationResponseInterfaceFactory;
@@ -98,7 +91,6 @@ class ProductReviewsServer implements ProductReviewsServerInterface
      * @param ReviewDataProvider $reviewDataProvider
      * @param ReadReviewMapper $readReviewMapper
      * @param ProductReviewResponseInterfaceFactory $productReviewResponseInterfaceFactory
-     * @param CustomerProductReviewResponseInterfaceFactory $customerProductReviewResponseInterfaceFactory
      * @param PaginationResponseInterfaceFactory $paginationResponseInterfaceFactory
      * @param ProductReviewCountResponseInterfaceFactory $productReviewCountResponseInterfaceFactory
      * @param LoggerInterface $logger
@@ -111,7 +103,6 @@ class ProductReviewsServer implements ProductReviewsServerInterface
         ReviewDataProvider $reviewDataProvider,
         ReadReviewMapper $readReviewMapper,
         ProductReviewResponseInterfaceFactory $productReviewResponseInterfaceFactory,
-        CustomerProductReviewResponseInterfaceFactory $customerProductReviewResponseInterfaceFactory,
         PaginationResponseInterfaceFactory $paginationResponseInterfaceFactory,
         ProductReviewCountResponseInterfaceFactory $productReviewCountResponseInterfaceFactory,
         LoggerInterface $logger
@@ -123,7 +114,6 @@ class ProductReviewsServer implements ProductReviewsServerInterface
         $this->reviewDataProvider = $reviewDataProvider;
         $this->readReviewMapper = $readReviewMapper;
         $this->productReviewResponseInterfaceFactory = $productReviewResponseInterfaceFactory;
-        $this->customerProductReviewResponseInterfaceFactory = $customerProductReviewResponseInterfaceFactory;
         $this->paginationResponseInterfaceFactory = $paginationResponseInterfaceFactory;
         $this->productReviewCountResponseInterfaceFactory = $productReviewCountResponseInterfaceFactory;
         $this->logger = $logger;
@@ -190,16 +180,43 @@ class ProductReviewsServer implements ProductReviewsServerInterface
 
     /**
      * @inheritdoc
-     * TODO encapsulate common (getProductReviews + getCustomerProductReviews) part into private method
      */
     public function getProductReviews(ProductReviewRequestInterface $request): ProductReviewResponseInterface
     {
-        $items = [];
         $reviews = $this->reviewDataProvider->fetchByProductId(
             $request->getProductId(),
             $request->getStore(),
             $request->getPagination()
         );
+
+        return $this->prepareProductReviewsResultResponse($reviews);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCustomerProductReviews(
+        CustomerProductReviewRequestInterface $request
+    ): ProductReviewResponseInterface {
+        $reviews = $this->reviewDataProvider->fetchByCustomerId(
+            $request->getCustomerId(),
+            $request->getStore(),
+            $request->getPagination()
+        );
+
+        return $this->prepareProductReviewsResultResponse($reviews);
+    }
+
+    /**
+     * Prepare product reviews result response
+     *
+     * @param array $reviews
+     *
+     * @return ProductReviewResponseInterface
+     */
+    private function prepareProductReviewsResultResponse(array $reviews): ProductReviewResponseInterface
+    {
+        $items = [];
 
         foreach ($reviews as $review) {
             $items[$review['id']] = $this->readReviewMapper->setData($review)->build();
@@ -208,37 +225,7 @@ class ProductReviewsServer implements ProductReviewsServerInterface
         $result = $this->productReviewResponseInterfaceFactory->create();
         $result->setItems($items);
 
-        if (!empty($request->getPagination()) && !empty($items)) {
-            $paginationResult = $this->paginationResponseInterfaceFactory->create();
-            $paginationResult->setPageSize(\count($items));
-            $paginationResult->setCursor(\array_key_last($items));
-            $result->setPagination($paginationResult);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getCustomerProductReviews(
-        CustomerProductReviewRequestInterface $request
-    ): CustomerProductReviewResponseInterface {
-        $items = [];
-        $reviews = $this->reviewDataProvider->fetchByCustomerId(
-            $request->getCustomerId(),
-            $request->getStore(),
-            $request->getPagination()
-        );
-
-        foreach ($reviews as $review) {
-            $items[] = $this->readReviewMapper->setData($review)->build();
-        }
-
-        $result = $this->customerProductReviewResponseInterfaceFactory->create();
-        $result->setItems($items);
-
-        if (!empty($request->getPagination()) && !empty($items)) {
+        if (!empty($items)) {
             $paginationResult = $this->paginationResponseInterfaceFactory->create();
             $paginationResult->setPageSize(\count($items));
             $paginationResult->setCursor(\array_key_last($items));
