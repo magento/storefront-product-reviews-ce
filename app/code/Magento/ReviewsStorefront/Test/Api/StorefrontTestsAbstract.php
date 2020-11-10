@@ -95,8 +95,24 @@ abstract class StorefrontTestsAbstract extends TestCase
     public function run(TestResult $result = null): TestResult
     {
         $this->cleanOldMessages();
+        $this->resetIndexerToOnSave();
 
         return parent::run($result);
+    }
+
+    /**
+     * Resetting indexer to 'on save' mode
+     *
+     * @return void
+     */
+    private function resetIndexerToOnSave(): void
+    {
+        $indexer = Bootstrap::getObjectManager()->get(\Magento\Indexer\Model\Indexer::class);
+        $indexer->load('catalog_data_exporter_product_reviews');
+        $indexer->setScheduled(false);
+
+        $indexer->load('catalog_data_exporter_rating_metadata');
+        $indexer->setScheduled(false);
     }
 
     /**
