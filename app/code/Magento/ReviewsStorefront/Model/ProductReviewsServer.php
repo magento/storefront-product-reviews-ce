@@ -146,8 +146,6 @@ class ProductReviewsServer implements ProductReviewsServerInterface
             $response->setMessage($message = \sprintf('Cannot process reviews import: %s', $exception->getMessage()));
             $response->setStatus(false);
             $this->logger->error($message, ['exception' => $exception]);
-
-            throw $exception; // todo for testing
         }
 
         return $response;
