@@ -40,10 +40,8 @@ class ReviewsConsumerInvoker
      */
     public function invoke(array $consumersToProcess = []): void
     {
-        $objectManager = Bootstrap::getObjectManager();
-
         /** @var ConsumerFactory $consumerFactory */
-        $consumerFactory = $objectManager->create(ConsumerFactory::class);
+        $consumerFactory = Bootstrap::getObjectManager()->create(ConsumerFactory::class);
         $consumersToProcess = $consumersToProcess ?: self::CONSUMERS;
 
         foreach ($consumersToProcess as $consumerName) {

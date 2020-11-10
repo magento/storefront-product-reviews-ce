@@ -69,6 +69,8 @@ class ReviewsConsumer
                 ),
                 ['exception' => $e]
             );
+
+            throw $e; // todo for testing
         }
     }
 }

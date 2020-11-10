@@ -96,6 +96,8 @@ class ProductReviewsServer implements ProductReviewsServerInterface
      * @param PaginationResponseInterfaceFactory $paginationResponseInterfaceFactory
      * @param ProductReviewCountResponseInterfaceFactory $productReviewCountResponseInterfaceFactory
      * @param LoggerInterface $logger
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         ImportReviewArrayMapper $importReviewArrayMapper,
@@ -144,6 +146,8 @@ class ProductReviewsServer implements ProductReviewsServerInterface
             $response->setMessage($message = \sprintf('Cannot process reviews import: %s', $exception->getMessage()));
             $response->setStatus(false);
             $this->logger->error($message, ['exception' => $exception]);
+
+            throw $exception; // todo for testing
         }
 
         return $response;
