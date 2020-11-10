@@ -60,6 +60,8 @@ class PublishReviewsConsumer implements ConsumerEventInterface
      */
     public function execute(array $entities, string $scope = null): void
     {
+        // todo remove
+        throw new \Exception(\implode(',', \array_map(function ($e) {return $e->getEntityId();}, $entities)));
         $reviewsData = $this->fetchReviews->execute($entities);
 
         foreach ($reviewsData as &$data) {
