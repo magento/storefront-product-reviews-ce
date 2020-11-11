@@ -31,21 +31,25 @@ use PHPUnit\Framework\TestResult;
 abstract class StorefrontTestsAbstract extends TestCase
 {
     /**
-     * List of reviews & ratings metadata feed names
+     * List of storefront feed names
      *
      * @var array
      */
     private const FEEDS = [
+        'catalog_data_exporter_categories',
+        'catalog_data_exporter_products',
         'catalog_data_exporter_product_reviews',
         'catalog_data_exporter_rating_metadata',
     ];
 
     /**
-     * List of queues used for reviews & ratings metadata
+     * List of queues used for storefront
      *
      * @var array
      */
     private const QUEUES = [
+        'catalog.category.export.queue',
+        'catalog.product.export.queue',
         'export.product.reviews.queue',
         'export.rating.metadata.queue',
     ];
@@ -109,8 +113,11 @@ abstract class StorefrontTestsAbstract extends TestCase
         $availableStores = $storeManager->getStores();
 
         $this->deleteDataSource('review', null);
-        foreach ($availableStores as $store) {
-            $this->deleteDataSource('rating_metadata', $store->getCode());
+
+        foreach (['rating_metadata', 'category', 'product'] as $entityType) {
+            foreach ($availableStores as $store) {
+                $this->deleteDataSource($entityType, $store->getCode());
+            }
         }
     }
 
