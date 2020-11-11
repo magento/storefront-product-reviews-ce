@@ -29,7 +29,7 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class ReviewsTest extends \Magento\CatalogStorefront\Test\Api\StorefrontTestsAbstract
+class ReviewsTest extends StorefrontTestsAbstract
 {
     /**
      * @var ProductReviewsServer
