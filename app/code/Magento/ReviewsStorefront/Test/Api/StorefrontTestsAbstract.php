@@ -84,7 +84,7 @@ abstract class StorefrontTestsAbstract extends TestCase
     {
         parent::tearDown();
 
-        $this->clearCatalogStorage();
+        $this->cleanStorage();
         $this->cleanFeeds();
         $this->cleanOldMessages();
     }
@@ -95,30 +95,14 @@ abstract class StorefrontTestsAbstract extends TestCase
     public function run(TestResult $result = null): TestResult
     {
         $this->cleanOldMessages();
-        $this->resetIndexerToOnSave();
 
         return parent::run($result);
     }
 
     /**
-     * Resetting indexer to 'on save' mode
-     *
-     * @return void
-     */
-    private function resetIndexerToOnSave(): void
-    {
-        $indexer = Bootstrap::getObjectManager()->get(\Magento\Indexer\Model\Indexer::class);
-        $indexer->load('catalog_data_exporter_product_reviews');
-        $indexer->setScheduled(false);
-
-        $indexer->load('catalog_data_exporter_rating_metadata');
-        $indexer->setScheduled(false);
-    }
-
-    /**
      * Remove review & rating storage to prevent data duplication in tests
      */
-    private function clearCatalogStorage(): void
+    private function cleanStorage(): void
     {
         /** @var StoreManagerInterface $storeManager */
         $storeManager = Bootstrap::getObjectManager()->get(StoreManagerInterface::class);
@@ -195,7 +179,10 @@ abstract class StorefrontTestsAbstract extends TestCase
     protected function runTest()
     {
         if (!$this->isSoap()) {
-            Bootstrap::getObjectManager()->create(ConsumerInvoker::class)->invoke();
+            /* @var ConsumerInvoker $consumerInvoker */
+            $consumerInvoker = Bootstrap::getObjectManager()->create(ConsumerInvoker::class);
+            $consumerInvoker->invoke();
+
             $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
 
             parent::runTest();

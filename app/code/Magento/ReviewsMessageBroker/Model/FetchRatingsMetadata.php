@@ -66,6 +66,7 @@ class FetchRatingsMetadata implements FetchRatingsMetadataInterface
                 ),
                 ['exception' => $e]
             );
+
             return [];
         }
 

@@ -110,9 +110,8 @@ class ReviewsTest extends StorefrontTestsAbstract
      * @param array $reviewsDataProvider
      *
      * @magentoDataFixture Magento/Review/_files/customer_review_with_rating.php
-     * @dataProvider getReviewsDataProvider
-     *
      * @magentoDbIsolation disabled
+     * @dataProvider getReviewsDataProvider
      *
      * @return void
      *
@@ -142,9 +141,8 @@ class ReviewsTest extends StorefrontTestsAbstract
      * @param array $reviewsDataProvider
      *
      * @magentoDataFixture Magento/Review/_files/customer_review_with_rating.php
-     * @dataProvider getReviewsDataProvider
-     *
      * @magentoDbIsolation disabled
+     * @dataProvider getReviewsDataProvider
      *
      * @return void
      *

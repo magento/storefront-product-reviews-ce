@@ -65,6 +65,7 @@ class FetchReviews implements FetchReviewsInterface
                 ),
                 ['exception' => $e]
             );
+
             return [];
         }
 
