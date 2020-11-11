@@ -190,7 +190,7 @@ abstract class StorefrontTestsAbstract extends TestCase
             $consumerInvoker = Bootstrap::getObjectManager()->create(ConsumerInvoker::class);
             $consumerInvoker->invoke();
 
-//            $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
+            $this->dataDefinition->refreshDataSource($this->storageState->getCurrentDataSourceName(['review']));
 
             parent::runTest();
         }
