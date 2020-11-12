@@ -10,6 +10,7 @@ namespace Magento\ReviewsStorefront\Test\Api;
 
 use Magento\Framework\Amqp\Config;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Indexer\Model\Indexer;
 use Magento\ReviewsStorefront\Model\Storage\Client\DataDefinitionInterface;
 use Magento\ReviewsStorefront\Model\Storage\State;
 use Magento\Store\Model\StoreManagerInterface;
@@ -99,6 +100,7 @@ abstract class StorefrontTestsAbstract extends TestCase
     public function run(TestResult $result = null): TestResult
     {
         $this->cleanOldMessages();
+        $this->resetIndexerToOnSave();
 
         return parent::run($result);
     }
@@ -204,6 +206,22 @@ abstract class StorefrontTestsAbstract extends TestCase
     private function isSoap(): bool
     {
         return TESTS_WEB_API_ADAPTER === 'soap';
+    }
+
+    /**
+     * Resetting indexer to 'on save' mode
+     *
+     * @return void
+     */
+    private function resetIndexerToOnSave(): void
+    {
+        $indexer =  \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->get(Indexer::class);
+
+        foreach (self::FEEDS as $indexerName) {
+            $indexer->load($indexerName);
+            $indexer->setScheduled(false);
+        }
     }
 
     /**
