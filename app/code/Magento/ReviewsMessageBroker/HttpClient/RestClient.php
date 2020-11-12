@@ -107,7 +107,7 @@ class RestClient
     {
         // TODO: for test purposes only. base URL of "Export API" should be retrieved from configuration/ or from event
         $storefrontAppHost = $this->url->getBaseUrl();
-        $storefrontAppHost = 'http://localhost';
+
         return rtrim($storefrontAppHost, '/') . $this->restBasePath . ltrim($resourcePath, '/');
     }
 }
