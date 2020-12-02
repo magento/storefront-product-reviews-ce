@@ -6,3 +6,5 @@ app/code/Magento/ReviewsStorefront/Model/Storage/Client/Config.php
 app/code/Magento/ReviewsStorefront/Model/StorageRepository.php
 app/code/Magento/ReviewsStorefront/Model/Storage/Client/ElasticsearchCommand.php
 app/code/Magento/ReviewsStorefront/Model/Storage/Data/DocumentIteratorFactory.php
+app/code/Magento/ReviewsStorefront/Model/Storage/Client/Config.php
+Magento/ReviewsStorefront/Model/Storage/Client/Config.php
