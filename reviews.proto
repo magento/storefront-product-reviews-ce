@@ -1,0 +1,145 @@
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+syntax = "proto3";
+
+package magento.reviewsStorefrontApi.proto;
+
+option php_metadata_namespace = "Magento\\ReviewsStorefrontApi\\Metadata";
+
+message PaginationRequest {
+  int32 size = 1;
+  int32 cursor = 2;
+}
+
+message PaginationResponse {
+  int32 page_size = 1;
+  int32 cursor = 2;
+}
+
+service ProductReviews {
+  rpc importProductReviews (ImportReviewsRequest) returns (ImportReviewsResponse) {}
+  rpc deleteProductReviews (DeleteReviewsRequest) returns (DeleteReviewsResponse) {}
+  rpc getProductReviews (ProductReviewRequest) returns (ProductReviewResponse) {}
+  rpc getCustomerProductReviews (CustomerProductReviewRequest) returns (ProductReviewResponse) {}
+  rpc getProductReviewCount (ProductReviewCountRequest) returns (ProductReviewCountResponse) {}
+}
+
+message ImportReviewsRequest {
+  repeated ImportReview reviews = 1;
+  string store = 2;
+}
+
+message ImportReviewsResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+message DeleteReviewsRequest {
+  repeated string reviewIds = 1;
+  string store = 2;
+}
+
+message DeleteReviewsResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+message ProductReviewRequest {
+  string product_id = 1;
+  string store = 2;
+  PaginationRequest pagination = 3;
+}
+
+message ProductReviewResponse {
+  repeated ReadReview items = 1;
+  PaginationResponse pagination = 2;
+}
+
+message CustomerProductReviewRequest {
+  string customer_id = 1;
+  string store = 2;
+  PaginationRequest pagination = 3;
+}
+
+message ProductReviewCountRequest {
+  string product_id = 1;
+  string store = 2;
+}
+
+message ProductReviewCountResponse {
+  int32 review_count = 1;
+}
+
+service RatingsMetadata {
+  rpc importRatingsMetadata (ImportRatingsMetadataRequest) returns (ImportRatingsMetadataResponse) {}
+  rpc deleteRatingsMetadata (DeleteRatingsMetadataRequest) returns (DeleteRatingsMetadataResponse) {}
+  rpc getRatingsMetadata (RatingsMetadataRequest) returns (RatingsMetadataResponse) {}
+}
+
+message ImportRatingsMetadataRequest {
+  repeated RatingMetadata metadata = 1;
+  string store = 2;
+}
+
+message ImportRatingsMetadataResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+message DeleteRatingsMetadataRequest {
+  repeated string ratingIds = 1;
+  string store = 2;
+}
+
+message DeleteRatingsMetadataResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+message RatingsMetadataRequest {
+  repeated string rating_ids = 1;
+  string store = 2;
+}
+
+message RatingsMetadataResponse {
+  repeated RatingMetadata items = 1;
+}
+
+message ImportReview {
+  string id = 1;
+  string product_id = 2;
+  string title = 3;
+  string nickname = 4;
+  string text = 5;
+  string customer_id = 6;
+  repeated string visibility = 7; // array of scope codes
+  repeated Rating ratings = 8;
+}
+
+message ReadReview {
+  string id = 1;
+  string product_id = 2;
+  string title = 3;
+  string nickname = 4;
+  string text = 5;
+  repeated Rating ratings = 6;
+}
+
+message Rating {
+  string rating_id = 1; // Base64 encoded rating ID
+  string value = 2; // Rating Value
+}
+
+message RatingMetadata {
+  string id = 1;  // Base64 encoded rating ID
+  string name = 2; // The label assigned to an aspect of a product that is being rated, such as quality or price
+  repeated RatingValue values = 3; // List of product review ratings
+}
+
+message RatingValue {
+  string value_id = 1; // Base 64 encoded rating value id
+  string value = 2; // e.g 3, 4, 5
+  int32 position = 3;
+}

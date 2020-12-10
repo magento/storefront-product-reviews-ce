@@ -1,0 +1,3 @@
+magento/module-reviews-message-broker
+magento/module-reviews-storefront
+magento/module-reviews-storefront-api

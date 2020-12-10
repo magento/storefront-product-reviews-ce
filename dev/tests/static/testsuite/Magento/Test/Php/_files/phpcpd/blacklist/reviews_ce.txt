@@ -1,0 +1,7 @@
+Magento/ReviewsStorefrontApi/Api
+Magento/ReviewsStorefrontApi/Proto
+Magento/ReviewsStorefrontApi/Api/Data
+app/code/Magento/ReviewsMessageBroker/HttpClient/CurlClient.php
+app/code/Magento/ReviewsStorefront/Model/StorageRepository.php
+app/code/Magento/ReviewsStorefront/Model/Storage/Data/DocumentIteratorFactory.php
+app/code/Magento/ReviewsStorefront/Model/Storage/Client
