@@ -76,7 +76,7 @@ class Installer
                         'connection' => 'default'
                     ]
                 ],
-                'storefront-search' => [
+                'storefront-product-reviews' => [
                     'connections' => [
                         //Connection config to monolith ES
                         'magento' => [
