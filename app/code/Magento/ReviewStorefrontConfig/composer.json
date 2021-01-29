@@ -1,6 +1,6 @@
 {
-    "name": "magento/module-search-storefront-config",
-    "description": "Config for module-search-storefront",
+    "name": "magento/module-review-storefront-config",
+    "description": "Config for module-review-storefront",
     "config": {
         "sort-packages": true
     },
