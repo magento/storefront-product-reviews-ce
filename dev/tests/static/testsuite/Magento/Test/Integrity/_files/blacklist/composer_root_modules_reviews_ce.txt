@@ -1,3 +1,5 @@
 magento/module-reviews-message-broker
 magento/module-reviews-storefront
 magento/module-reviews-storefront-api
+magento/module-review-storefront-config
+magento/module-review-storefront-stub
