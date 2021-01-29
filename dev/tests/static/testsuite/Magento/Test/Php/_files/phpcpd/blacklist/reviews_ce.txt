@@ -9,3 +9,4 @@ StorageRepository.php
 DocumentIteratorFactory.php
 Config.php
 Installer.php
+storefront_product_review_autoload.php
