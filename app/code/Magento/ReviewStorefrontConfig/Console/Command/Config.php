@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command for search service minimum config set up
+ * Command for product reviews service minimum config set up
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
