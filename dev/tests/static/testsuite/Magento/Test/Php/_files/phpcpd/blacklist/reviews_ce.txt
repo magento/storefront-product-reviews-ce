@@ -7,3 +7,6 @@ app/code/Magento/ReviewsStorefront/Model/Storage/Data/DocumentIteratorFactory.ph
 app/code/Magento/ReviewsStorefront/Model/Storage/Client
 StorageRepository.php
 DocumentIteratorFactory.php
+Config.php
+Installer.php
+storefront_product_review_autoload.php
