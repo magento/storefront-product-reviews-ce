@@ -10,22 +10,12 @@
                 type="Magento\ReviewsStorefront\Model\ProductReviewsServer"/>
     <preference for="Magento\ReviewsStorefrontApi\Api\RatingsMetadataServerInterface"
                 type="Magento\ReviewsStorefront\Model\RatingsMetadataServer"/>
-    <preference for="Magento\ReviewsStorefront\Model\Storage\Client\DataDefinitionInterface"
-                type="Magento\ReviewsStorefront\Model\Storage\Client\ElasticsearchDataDefinitionAdapter"/>
-    <preference for="Magento\ReviewsStorefront\Model\Storage\Client\QueryInterface"
-                type="Magento\ReviewsStorefront\Model\Storage\Client\ElasticsearchQuery"/>
-    <preference for="Magento\ReviewsStorefront\Model\Storage\Client\CommandInterface"
-                type="Magento\ReviewsStorefront\Model\Storage\Client\ElasticsearchCommand"/>
 
-    <type name="Magento\ReviewsStorefront\Model\Storage\Client\Config\EntityConfigPool">
+    <type name="Magento\StorefrontStorage\Model\Client\Config\EntityConfigPool">
         <arguments>
             <argument name="configs" xsi:type="array">
-                <item name="review" xsi:type="object">
-                    Magento\ReviewsStorefront\Model\Storage\Client\Config\Review
-                </item>
-                <item name="rating_metadata" xsi:type="object">
-                    Magento\ReviewsStorefront\Model\Storage\Client\Config\RatingMetadata
-                </item>
+                <item name="review" xsi:type="object">Magento\ReviewsStorefront\Model\Storage\Client\Config\Review</item>
+                <item name="rating_metadata" xsi:type="object">Magento\ReviewsStorefront\Model\Storage\Client\Config\RatingMetadata</item>
             </argument>
         </arguments>
     </type>

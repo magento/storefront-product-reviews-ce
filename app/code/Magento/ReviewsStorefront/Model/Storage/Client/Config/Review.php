@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\Model\Storage\Client\Config;
 
+use Magento\StorefrontStorage\Model\Client\Config\EntityConfigInterface;
+
 /**
  * Review entity type config.
  */
