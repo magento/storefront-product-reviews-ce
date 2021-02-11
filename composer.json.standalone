@@ -25,7 +25,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Magento\\Framework\\": "vendor/magento/framework/",
             "Magento\\": "app/code/Magento/"
         },
         "psr-0": {
