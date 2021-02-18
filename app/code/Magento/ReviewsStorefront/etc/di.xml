@@ -10,6 +10,8 @@
                 type="Magento\ReviewsStorefront\Model\ProductReviewsServer"/>
     <preference for="Magento\ReviewsStorefrontApi\Api\RatingsMetadataServerInterface"
                 type="Magento\ReviewsStorefront\Model\RatingsMetadataServer"/>
+    <preference for="Magento\ReviewsStorefront\Model\Storage\Client\QueryInterface"
+                type="Magento\ReviewsStorefront\Model\Storage\Client\ElasticsearchQuery"/>
 
     <type name="Magento\StorefrontStorage\Model\Client\Config\EntityConfigPool">
         <arguments>

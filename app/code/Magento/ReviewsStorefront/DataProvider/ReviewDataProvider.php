@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\DataProvider;
 
-use Magento\StorefrontStorage\Model\Client\QueryInterface;
+use Magento\ReviewsStorefront\Model\Storage\Client\QueryInterface;
 use Magento\StorefrontStorage\Model\State;
 use Magento\ReviewsStorefront\Model\Storage\Client\Config\Review;
 use Magento\ReviewsStorefrontApi\Api\Data\PaginationRequestInterface;
