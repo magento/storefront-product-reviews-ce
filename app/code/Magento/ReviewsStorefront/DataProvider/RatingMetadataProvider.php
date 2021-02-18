@@ -11,8 +11,8 @@ namespace Magento\ReviewsStorefront\DataProvider;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\ReviewsStorefront\Model\Storage\Client\Config\RatingMetadata;
-use Magento\ReviewsStorefront\Model\Storage\Client\QueryInterface;
-use Magento\ReviewsStorefront\Model\Storage\State;
+use Magento\StorefrontStorage\Model\Client\QueryInterface;
+use Magento\StorefrontStorage\Model\State;
 use Psr\Log\LoggerInterface;
 
 /**

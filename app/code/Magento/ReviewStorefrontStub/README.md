@@ -1,1 +1,0 @@
-Stubs for Review Storefront service

@@ -10,7 +10,7 @@ namespace Magento\ReviewsStorefront\Model\Storage\Client;
 
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Exception\RuntimeException;
-use Magento\ReviewsStorefront\Model\Storage\Data\EntryIteratorInterface;
+use Magento\StorefrontStorage\Model\Data\EntryIteratorInterface;
 
 /**
  * Storage client interface for Read access operations.

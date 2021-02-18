@@ -7,6 +7,8 @@
     "require": {
         "php": "~7.3.0||~7.4.0",
         "magento/framework": "*",
+        "magento/module-storefront-storage": "*",
+        "magento/module-storefront-framework": "*",
         "magento/module-reviews-storefront-api": "*"
     },
     "type": "magento2-module",

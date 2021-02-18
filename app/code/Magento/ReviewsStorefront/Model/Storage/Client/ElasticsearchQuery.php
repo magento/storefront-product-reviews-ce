@@ -8,13 +8,15 @@ declare(strict_types=1);
 
 namespace Magento\ReviewsStorefront\Model\Storage\Client;
 
-use Magento\ReviewsStorefront\Model\Storage\Data\DocumentFactory;
-use Magento\ReviewsStorefront\Model\Storage\Data\DocumentIteratorFactory;
-use Magento\ReviewsStorefront\Model\Storage\Data\EntryIteratorInterface;
-use Magento\ReviewsStorefront\Model\Storage\Data\SearchResultIteratorFactory;
+use Magento\StorefrontStorage\Model\Data\DocumentFactory;
+use Magento\StorefrontStorage\Model\Data\DocumentIteratorFactory;
+use Magento\StorefrontStorage\Model\Data\EntryIteratorInterface;
+use Magento\StorefrontStorage\Model\Data\SearchResultIteratorFactory;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
+use Magento\StorefrontStorage\Model\Client\Config;
+use Magento\StorefrontStorage\Model\Client\ConnectionPull;
 
 /**
  * Elasticsearch client adapter for read access operations.
